@@ -62,6 +62,7 @@ def calculate_shipping_charges(doc):
 	cv = tv if tv > (carrier.min_val) else carrier.min_val
 	ca = ca if  ca > cv * default_freight else cv * default_freight
 
-	doc.total_volume = tv
+	if doc.meta.get_field("total_volume"):
+		doc.total_volume = tv
 
 	return ca + carrier.basic_charge
