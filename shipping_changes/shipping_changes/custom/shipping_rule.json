@@ -1,0 +1,32 @@
+{
+ "custom_fields": [],
+ "custom_perms": [],
+ "doctype": "Shipping Rule",
+ "property_setters": [
+  {
+   "_assign": null,
+   "_comments": null,
+   "_liked_by": null,
+   "_user_tags": null,
+   "creation": "2022-09-25 07:55:03.370405",
+   "default_value": null,
+   "doc_type": "Shipping Rule",
+   "docstatus": 0,
+   "doctype_or_field": "DocField",
+   "field_name": "calculate_based_on",
+   "idx": 0,
+   "modified": "2022-09-25 07:55:03.370405",
+   "modified_by": "Administrator",
+   "name": "Shipping Rule-calculate_based_on-options",
+   "owner": "Administrator",
+   "parent": null,
+   "parentfield": null,
+   "parenttype": null,
+   "property": "options",
+   "property_type": "Text",
+   "row_name": null,
+   "value": "Fixed\nNet Total\nNet Weight\nShipping Carrier"
+  }
+ ],
+ "sync_on_migrate": 1
+}
