@@ -1,0 +1,90 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-09-25 07:51:13.476457",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "shipping_charges_section",
+  "min_amount",
+  "min_val",
+  "column_break_8",
+  "basic_charge",
+  "default_freight",
+  "sb_section",
+  "shipping_carrier_locations"
+ ],
+ "fields": [
+  {
+   "fieldname": "shipping_charges_section",
+   "fieldtype": "Section Break",
+   "label": "Shipping Charges"
+  },
+  {
+   "fieldname": "min_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Min. Amount",
+   "options": "Company:company:default_currency"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "basic_charge",
+   "fieldtype": "Currency",
+   "label": "Basic Charge",
+   "options": "Company:company:default_currency"
+  },
+  {
+   "fieldname": "sb_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "shipping_carrier_locations",
+   "fieldtype": "Table",
+   "label": "Shipping Carrier Locations",
+   "options": "Shipping Carrier Locations"
+  },
+  {
+   "default": "0",
+   "fieldname": "min_val",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Min. Volumn"
+  },
+  {
+   "fieldname": "default_freight",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Default Freight",
+   "options": "Company:company:default_currency"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2022-10-16 08:02:55.148286",
+ "modified_by": "Administrator",
+ "module": "Shipping Changes",
+ "name": "Shipping Carrier",
+ "name_case": "UPPER CASE",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
