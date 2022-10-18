@@ -43,28 +43,29 @@ class CustomShippingRule(ShippingRule):
 		self.add_shipping_rule_to_tax_table(doc, shipping_amount)
 
 def calculate_shipping_charges(doc):
-	carrier = frappe.get_doc("Shipping Carrier","Shipping Carrier")
-	default_freight = carrier.default_freight
-	for row in carrier.get("shipping_carrier_locations"):
-		if row.get("location") == doc.get("location"):
-			default_freight = row.get("rate")
-			break
+	if doc.get("doctype") in ["Sales Order", "Delivery Note", "Sales Invoice"]:
+		carrier = frappe.get_doc("Shipping Carrier","Shipping Carrier")
+		default_freight = carrier.default_freight
+		for row in carrier.get("shipping_carrier_locations"):
+			if row.get("location") == doc.get("location"):
+				default_freight = row.get("rate")
+				break
 
-	tv = 0
-	cv = 0
-	ca = carrier.min_amount
-	for item in doc.items:
-		uom_details = frappe.db.get_value("UOM Conversion Detail",{"parent":item.item_code,"uom":item.uom},["volume_ccm","conversion_factor"],as_dict=True)
-		civ = item.item_volume
-		if uom_details and not civ:
-			civ =  (uom_details.volume_ccm or 0) * item.qty
-		tv += civ
-		if civ and frappe.get_meta(doc.meta.get_field("items").get("options")).has_field("item_volume"):
-			item.item_volume = civ
+		tv = 0
+		cv = 0
+		ca = carrier.min_amount
+		for item in doc.items:
+			uom_details = frappe.db.get_value("UOM Conversion Detail",{"parent":item.item_code,"uom":item.uom},["volume_ccm","conversion_factor"],as_dict=True)
+			civ = item.get("item_volume") or 0
+			if uom_details and not civ:
+				civ =  (uom_details.volume_ccm or 0) * item.qty
+			tv += civ
+			if civ and frappe.get_meta(doc.meta.get_field("items").get("options")).has_field("item_volume"):
+				item.item_volume = civ
 
-	cv = tv if tv > (carrier.min_val) else carrier.min_val
-	ca = ca if  ca > cv * default_freight else cv * default_freight
-	if doc.meta.get_field("total_volume"):
-		doc.total_volume = tv
+		cv = tv if tv > (carrier.min_val) else carrier.min_val
+		ca = ca if  ca > cv * default_freight else cv * default_freight
+		if doc.meta.get_field("total_volume"):
+			doc.total_volume = tv
 
-	return ca + carrier.basic_charge
+		return ca + carrier.basic_charge
