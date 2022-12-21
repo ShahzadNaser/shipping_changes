@@ -55,7 +55,7 @@ def calculate_shipping_charges(doc):
 		cv = 0
 		ca = carrier.min_amount
 		for item in doc.items:
-			uom_details = frappe.db.get_value("UOM Conversion Detail",{"parent":item.item_code,"uom":item.uom},["volume_ccm","conversion_factor"],as_dict=True)
+			uom_details = frappe.db.get_value("UOM Conversion Detail",{"parent":item.item_code,"uom":item.uom},["volume_ccm","conversion_factor","length","breadth","width"],as_dict=True)
 			civ = item.get("item_volume") or 0
 			if uom_details and not civ:
 				civ =  (uom_details.volume_ccm or 0) * item.qty
